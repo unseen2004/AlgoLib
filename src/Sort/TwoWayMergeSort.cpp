@@ -1,6 +1,6 @@
 
-#include "TwoWayMergeSort.h"
-#include <algorithm>  // For std::min
+#include "../../include/Sort/TwoWayMergeSort.h"
+#include <algorithm>
 
 template <typename T>
 void TwoWayMergeSort<T>::merge(std::vector<T>& arr, int left, int mid, int right) {
@@ -55,4 +55,4 @@ void TwoWayMergeSort<T>::sort(std::vector<T>& arr) {
 
 template class TwoWayMergeSort<int>;
 template class TwoWayMergeSort<double>;
-template class TwoWayMergeSort<std::string>;
+
