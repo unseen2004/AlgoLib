@@ -6,39 +6,37 @@ set(CMAKE_CXX_STANDARD 14)
 include_directories(include)
 
 add_executable(AlgoLib
-        include/Algorithms/Node.h
-        include/Algorithms/TreeAlgorithms.h
+        include/Algorithms/TreeAlgorithms.hpp
         src/Algorithms/TreeAlgorithms.cpp
-        include/Algorithms/GraphAlgorithms.h
+        include/Algorithms/GraphAlgorithms.hpp
         src/Algorithms/GraphAlgorithms.cpp
-        include/Algorithms/SortingAlgorithms.h
         src/Algorithms/SortingAlgorithms.cpp
-        include/DataStructures/Node.h
-        include/DataStructures/Trie.h
-        include/DataStructures/LRU_Cache.h
-        include/DataStructures/Heap.h
-        include/DataStructures/LinkedList.h
-        include/DataStructures/DoubleLinkedList.h
+        include/DataStructures/Node.hpp
+        include/DataStructures/Trie.hpp
+        include/DataStructures/LRU_Cache.hpp
+        include/DataStructures/Heap.hpp
+        include/DataStructures/LinkedList.hpp
+        include/DataStructures/DoubleLinkedList.hpp
         src/DataStructures/Trie.cpp
         src/DataStructures/LRU_Cache.cpp
         src/DataStructures/Heap.cpp
         src/DataStructures/LinkedList.cpp
         src/DataStructures/DoubleLinkedList.cpp
-        include/DataStructures/AVLTree.h
+        include/DataStructures/AVLTree.hpp
         src/DataStructures/AVLTree.cpp
-        include/DataStructures/BTree.h
+        include/DataStructures/BTree.hpp
         src/DataStructures/BTree.cpp
-        include/DataStructures/BST.h
+        include/DataStructures/BST.hpp
         src/DataStructures/BST.cpp
-        include/DataStructures/RedBlackTree.h
+        include/DataStructures/RedBlackTree.hpp
         src/DataStructures/RedBlackTree.cpp
-        include/Algorithms/BloomFilter.h
+        include/Algorithms/BloomFilter.hpp
         src/Algorithms/BloomFilter.cpp
-        include/Algorithms/FordFulkerson.h
+        include/Algorithms/FordFulkerson.hpp
         src/Algorithms/FordFulkerson.cpp
-        include/Algorithms/UnionFind.h
+        include/Algorithms/UnionFind.hpp
         src/Algorithms/UnionFind.cpp
-        include/Algorithms/KruskalMST.h
+        include/Algorithms/KruskalMST.hpp
         src/Algorithms/KruskalMST.cpp
-        include/Algorithms/PrimMST.h
+        include/Algorithms/PrimMST.hpp
         src/Algorithms/PrimMST.cpp)
