@@ -1,42 +1,61 @@
-cmake_minimum_required(VERSION 3.29)
-project(AlgoLib)
+cmake_minimum_required(VERSION 3.26)
+project(AlgoLib_2_0 LANGUAGES CXX)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_EXPERIMENTAL_CXX_MODULE_CMAKE_API "2182bf5c-ef0d-489a-91da-49dbc3090d2a")
 
-include_directories(include)
+# Enable modules for GCC
+add_compile_options(-fmodules-ts)
 
-add_executable(AlgoLib
-        include/Algorithms/TreeAlgorithms.hpp
-        src/Algorithms/TreeAlgorithms.cpp
-        include/Algorithms/GraphAlgorithms.hpp
-        src/Algorithms/GraphAlgorithms.cpp
-        src/Algorithms/SortingAlgorithms.cpp
-        include/DataStructures/Node.hpp
-        include/DataStructures/Trie.hpp
-        include/DataStructures/LRU_Cache.hpp
-        include/DataStructures/Heap.hpp
-        include/DataStructures/LinkedList.hpp
-        include/DataStructures/DoubleLinkedList.hpp
-        src/DataStructures/Trie.cpp
-        src/DataStructures/LRU_Cache.cpp
-        src/DataStructures/Heap.cpp
-        src/DataStructures/LinkedList.cpp
-        src/DataStructures/DoubleLinkedList.cpp
-        include/DataStructures/AVLTree.hpp
-        src/DataStructures/AVLTree.cpp
-        include/DataStructures/BTree.hpp
-        src/DataStructures/BTree.cpp
-        include/DataStructures/BST.hpp
-        src/DataStructures/BST.cpp
-        include/DataStructures/RedBlackTree.hpp
-        src/DataStructures/RedBlackTree.cpp
-        include/Algorithms/BloomFilter.hpp
-        src/Algorithms/BloomFilter.cpp
-        include/Algorithms/FordFulkerson.hpp
-        src/Algorithms/FordFulkerson.cpp
-        include/Algorithms/UnionFind.hpp
-        src/Algorithms/UnionFind.cpp
-        include/Algorithms/KruskalMST.hpp
-        src/Algorithms/KruskalMST.cpp
-        include/Algorithms/PrimMST.hpp
-        src/Algorithms/PrimMST.cpp)
+# Create module library
+add_library(AlgoLib)
+
+# Use FILE_SET for modules
+target_sources(AlgoLib
+    PRIVATE
+    FILE_SET CXX_MODULES FILES
+        modules/DataStructures/Node.ixx
+        modules/DataStructures/Queue.ixx
+        modules/DataStructures/AVLTree.ixx
+        modules/DataStructures/BST.ixx
+        modules/DataStructures/BTree.ixx
+        modules/DataStructures/DoubleLinkedList.ixx
+        modules/DataStructures/Heap.ixx
+        modules/DataStructures/LinkedList.ixx
+        modules/DataStructures/LRU_Cache.ixx
+        modules/DataStructures/RedBlackTree.ixx
+        modules/DataStructures/Stack.ixx
+        modules/DataStructures/Trie.ixx
+        modules/Algorithms/Sort/BucketSort.ixx
+        modules/Algorithms/Sort/InsertionSort.ixx
+        modules/Algorithms/Sort/MergeSort.ixx
+        modules/Algorithms/Sort/QuickSort.ixx
+        modules/Algorithms/Sort/TwoWayMergeSort.ixx
+        modules/Algorithms/BloomFilter.ixx
+        modules/Algorithms/GraphAlgorithms.ixx
+        modules/Algorithms/FordFulkerson.ixx
+        modules/Algorithms/KruskalMST.ixx
+        modules/Algorithms/PrimMST.ixx
+        modules/Algorithms/TreeAlgorithms.ixx
+        modules/Algorithms/UnionFind.ixx
+)
+
+# Create test module files
+add_library(AlgoLib_TestModules OBJECT
+    tests/DataStructuresTests.ixx
+    tests/SortTests.ixx
+    tests/GraphAlgorithmsTests.ixx
+)
+
+target_compile_options(AlgoLib_TestModules PRIVATE -fmodules-ts)
+target_link_libraries(AlgoLib_TestModules PRIVATE AlgoLib)
+
+# Create test executable
+add_executable(AlgoLib_Tests tests/main.cpp)
+target_compile_options(AlgoLib_Tests PRIVATE -fmodules-ts)
+target_link_libraries(AlgoLib_Tests PRIVATE AlgoLib AlgoLib_TestModules)
+
+# Testing
+enable_testing()
+add_test(NAME AlgoLib_Tests COMMAND AlgoLib_Tests)
